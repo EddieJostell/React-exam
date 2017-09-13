@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import firebase from './firebase.js';
 import logo from './logo.svg';
+import Container from './components/Container/Container.js';
 import './App.css';
 
 class App extends Component {
@@ -8,12 +10,11 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to the FoodNetwork!</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Container>
         <button className="btn btn-primary"> Click Me! </button>
+        </Container>
       </div>
     );
   }
