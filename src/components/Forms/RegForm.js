@@ -23,10 +23,10 @@ class LoginForm extends Component {
             <input 
             type="text"
             className="form-control"
-            name="email"
+            name="regemail"
             placeholder="Enter E-mail"
             onChange={this.props.onChange}
-            value={this.props.email}
+            value={this.props.regemail}
             />
             
             { this.state.error && 
@@ -43,10 +43,10 @@ class LoginForm extends Component {
                 <input 
                 type="password" 
                 className="form-control" 
-                name="password"
+                name="regpassword"
                 placeholder="Password"
                 onChange={this.props.onChange}
-                value={this.props.password}
+                value={this.props.regpassword}
                 />
                 
                 {this.state.error &&
@@ -54,9 +54,7 @@ class LoginForm extends Component {
                     Sorry, that Password's not right. You suck!
                     </div>}
                     </div>
-                   {/*  <input onClick={this.props.register} type="submit" value="Register" className="btn btn-primary"/> */}
-                    <input onClick={this.props.login} type="submit" value="Login" className="btn btn-success"/>
-                    <input onClick={this.props.google} type="submit" value="Sign in with Google" className="btn btn-outline-primary"/>
+                    <input onClick={this.props.register} type="submit" value="Register" className="btn btn-primary"/>
                     </form>
                     </div>
                 )
