@@ -168,7 +168,7 @@ render() {
     </div> {/* END OF App-Header*/}
     <Container>
 
-    { (this.state.regVisible && !this.state.logVisible) ? <RegForm 
+    { ( !this.state.user && this.state.regVisible && !this.state.logVisible) ? <RegForm 
       regpassword={this.state.regpassword}
       regemail={this.state.regemail}
       onChange={this.onChange}
@@ -176,7 +176,7 @@ render() {
       error={this.state.error}
       /> :null }
 
-      { (this.state.logVisible && !this.state.regVisible) ? <LoginForm 
+      { (!this.state.user && this.state.logVisible && !this.state.regVisible) ? <LoginForm 
       password={this.state.password}
       email={this.state.email}
       onChange={this.onChange}
