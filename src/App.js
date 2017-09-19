@@ -154,24 +154,7 @@ class App extends Component {
       }
       
       fetchFromApi = (data) => {
-        //https://ghibliapi.herokuapp.com/films
-        //https://myanimelist.net/api/anime
-        //https://anilist.co/api/
-        //https://kitsu.io/api/edge/anime
-        
-        //https://github.com/FEND16/javascript3/blob/master/exercises/10_firebase_listeners.md
-        //https://github.com/FEND16/javascript3/blob/master/exercises/07_composition.md
-        //https://github.com/FEND16/javascript3/blob/master/exercises/08_propTypes_and_context.md
-        //https://github.com/toddmotto/public-apis#anime
-        //http://anilist-api.readthedocs.io/en/latest/introduction.html
-        //http://docs.kitsu.apiary.io/#introduction/status-codes
-        //https://github.com/FEND16/javascript3/blob/master/exercises/09_firebase_read_write.md
-        //https://github.com/FEND16/javascript3/blob/master/code/07_loginForm_send_state.js
-        //https://myanimelist.net/modules.php?go=api
-        //https://anilist.co/user/eduardoJ
-        //http://anilist-api.readthedocs.io/en/latest/authentication.html
-        //https://github.com/FEND16/javascript3/blob/master/code/07_loginForm_send_state.js
-        
+
         var URL = `https://anilist.co/api/browse/anime?access_token=${data}`;
         
         fetch(URL)
