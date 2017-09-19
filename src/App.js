@@ -28,172 +28,219 @@ class App extends Component {
     /* this.setState({[e.target.name] : this.state.loginBtn})
     this.setState({[e.target.name] : this.state.regBtn}) */
   }
-
+  
   logVisible = () => {
     console.log("LoginForm is visible!");
-    this.setState({logVisible: !this.state.logVisible})
-  }
-
-  regVisible = () => {
-    console.log("RegForm is visible!");
-    this.setState({regVisible: !this.state.regVisible})
-  }
-  
-  onSubmit = (e) => {
-    e.preventDefault();
-    firebase.auth()
-    .createUserWithEmailAndPassword(this.state.regemail, this.state.regpassword)
-    .catch(error => alert(error.message), error => console.log(error))
-    .then((user) => {
-      firebase
-      .database()
-      .ref(`users/${user.uid}`)
-      .set({ email: user.email, uid: user.uid })
-    })
-    .then((user) => {
-      alert("Welcome to HELL!");
-    })
-    /* .then(user =>  console.log("Created user", user)) */
+    this.setState({logVisible: !this.state.logVisible,
+      regVisible: false})
+    }
     
-    
-  }
-  
-  onAuthChanged = () => {
-    firebase.auth()
-    .onAuthStateChanged((user) => {
-      if(user) {
+    regVisible = () => {
+      console.log("RegForm is visible!");
+      this.setState({regVisible: !this.state.regVisible,
+        logVisible: false})
+      }
+      
+      onSubmit = (e) => {
+        e.preventDefault();
+        firebase.auth()
+        .createUserWithEmailAndPassword(this.state.regemail, this.state.regpassword)
+        .catch(error => alert(error.message), error => console.log(error))
+        .then((user) => {
+          firebase
+          .database()
+          .ref(`users/${user.uid}`)
+          .set({ email: user.email, uid: user.uid })
+        })
+        .then((user) => {
+          alert("Welcome to HELL!");
+        })
+        /* .then(user =>  console.log("Created user", user)) */
         
-        const newUser = {
-          email: user.email,
-          photoUrl: user.photoURL,
-          displayName: user.displayName
+        
+      }
+      
+      onAuthChanged = () => {
+        firebase.auth()
+        .onAuthStateChanged((user) => {
+          if(user) {
+            
+            const newUser = {
+              email: user.email,
+              photoUrl: user.photoURL,
+              displayName: user.displayName
+            }
+            
+            this.setState({user: newUser});
+            /*   this.setState({user: user}); */
+          }
+          else {
+            this.setState({user: ''});
+          }
+        })
+      }
+      
+      
+      signIn = (e) => {
+        e.preventDefault();
+        firebase.auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(user => console.log("SIGNED IN!"))
+        .catch(error => alert(error.message))
+        .catch(error => {
+          console.log("You goofed", error);
+        });
+        
+        console.log(this.state.user);
+      }
+      
+      signOut = (e) => {
+        e.preventDefault();
+        firebase.auth().signOut();
+        console.log("User signed out");
+        
+      }
+      
+      
+      
+      
+      signInWithGoogle = () => {
+        console.log("HEJ");
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+      }
+      
+      getRedirectResult = () => {
+        firebase.auth().getRedirectResult().then(function(result) {
+          if (result.credential) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // ...
+          }
+          // The signed-in user info.
+          var user = result.user;
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+        
+        
+      }
+      
+      fetchPostToApi = () => {
+        
+        let postURL = 
+        "https://anilist.co/api/auth/access_token?grant_type=client_credentials&client_id=eduardoj-lqksr&client_secret=dCd2I1SAbGIHl0dhql82ReB2rN"
+        
+        fetch(postURL, {
+          method: 'POST',
+          mode: 'cors',
+          redirect: 'follow',
+          headers: new Headers({
+            'Content-Type': 'text/plain'
+          })
+        }).then(response => response.json())
+        /*  .then(data => console.log(data.access_token)) */
+        .then(data => {this.fetchFromApi(data.access_token)})
+        .catch(error => console.log(error))
+        
+        
+      }
+      
+      fetchFromApi = (data) => {
+        //https://ghibliapi.herokuapp.com/films
+        //https://myanimelist.net/api/anime
+        //https://anilist.co/api/
+        //https://kitsu.io/api/edge/anime
+        
+        //https://github.com/FEND16/javascript3/blob/master/exercises/10_firebase_listeners.md
+        //https://github.com/FEND16/javascript3/blob/master/exercises/07_composition.md
+        //https://github.com/FEND16/javascript3/blob/master/exercises/08_propTypes_and_context.md
+        //https://github.com/toddmotto/public-apis#anime
+        //http://anilist-api.readthedocs.io/en/latest/introduction.html
+        //http://docs.kitsu.apiary.io/#introduction/status-codes
+        //https://github.com/FEND16/javascript3/blob/master/exercises/09_firebase_read_write.md
+        //https://github.com/FEND16/javascript3/blob/master/code/07_loginForm_send_state.js
+        //https://myanimelist.net/modules.php?go=api
+        //https://anilist.co/user/eduardoJ
+        //http://anilist-api.readthedocs.io/en/latest/authentication.html
+        //https://github.com/FEND16/javascript3/blob/master/code/07_loginForm_send_state.js
+        
+        var URL = `https://anilist.co/api/browse/anime?access_token=${data}`;
+        
+        fetch(URL)
+        .then(response => response.json()) 
+        /*  .then(data => console.log(data))  */        
+        .then(data => {console.log(data), this.setState({animeList: data}) })
+        .catch(error => console.log(error))
+        
+      }
+      
+      componentDidMount() {
+        this.onAuthChanged();
+        this.getRedirectResult();
+        this.fetchPostToApi();
+      }
+      
+      render() {
+        
+        const anime = this.state.animeList.map( (ani, key) => 
+        <div key={key}>
+        
+        <img src={ani.image_url_lge} />
+        <p> {ani.id} </p>
+        <p> {ani.title_romaji} || {ani.title_english} </p> 
+        <p> {ani.series_type} </p>
+        <p> {ani.airing_status} </p>
+        <p> {ani.genres} </p>
+        </div>)
+        
+        return (
+          <div className="App">
+          <div className="App-header">
+          <Navbar 
+          user={this.state.user} 
+          signOut={this.signOut} 
+          logBtn={this.logVisible} 
+          regBtn={this.regVisible}
+          google={this.signInWithGoogle}
+          />
+          
+          </div> {/* END OF App-Header*/}
+          <Container>
+          
+          { ( !this.state.user && this.state.regVisible) ? <RegForm 
+            regpassword={this.state.regpassword}
+            regemail={this.state.regemail}
+            onChange={this.onChange}
+            register={this.onSubmit}
+            error={this.state.error}
+            /> :null }
+            
+            { (!this.state.user && this.state.logVisible) ? <LoginForm 
+              password={this.state.password}
+              email={this.state.email}
+              onChange={this.onChange}
+              login={this.signIn}
+              error={this.state.error}
+              /> : null }
+              
+              
+              
+              {this.state.user &&  <div className="form-group">
+              <p> { anime } </p> 
+              </div> }
+              </Container>
+              </div>
+            );
+          }
         }
         
-        this.setState({user: newUser});
-        /*   this.setState({user: user}); */
-      }
-      else {
-        this.setState({user: ''});
-      }
-    })
-  }
-
-
-  signIn = (e) => {
-    e.preventDefault();
-    firebase.auth()
-    .signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then(user => console.log("SIGNED IN!"))
-    .catch(error => alert(error.message))
-    .catch(error => {
-      console.log("You goofed", error);
-    });
-    
-    console.log(this.state.user);
-  }
-  
-  signOut = (e) => {
-    e.preventDefault();
-    firebase.auth().signOut();
-    console.log("User signed out");
-    
-  }
-  
-
-  
-  
-  signInWithGoogle = () => {
-    console.log("HEJ");
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
-  }
-  
-  getRedirectResult = () => {
-    firebase.auth().getRedirectResult().then(function(result) {
-      if (result.credential) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // ...
-      }
-      // The signed-in user info.
-      var user = result.user;
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-    
-    
-  }
-  
-  fetchFromApi = () => {
-    fetch("https://ghibliapi.herokuapp.com/films")
-    .then(response => response.json())           //Get JSON, implicit return
-    .then(data => {this.setState({animeList: data});
-  })
-  .catch(error => console.log(error))
-}
-
-componentDidMount() {
-  this.onAuthChanged();
-  this.getRedirectResult();
-  this.fetchFromApi();
-}
-
-
-render() {
-  
-  const anime = this.state.animeList.map( (ani, key) => 
-  <div key={key}>
-
-   <p> {ani.title} </p>
-   <p> {ani.release_date} </p>  
-     </div>)
-  
-  return (
-    <div className="App">
-    <div className="App-header">
-    <Navbar 
-    user={this.state.user} 
-    signOut={this.signOut} 
-    logBtn={this.logVisible} 
-    regBtn={this.regVisible}
-    />
-
-    </div> {/* END OF App-Header*/}
-    <Container>
-
-    { ( !this.state.user && this.state.regVisible && !this.state.logVisible) ? <RegForm 
-      regpassword={this.state.regpassword}
-      regemail={this.state.regemail}
-      onChange={this.onChange}
-      register={this.onSubmit}
-      error={this.state.error}
-      /> :null }
-
-      { (!this.state.user && this.state.logVisible && !this.state.regVisible) ? <LoginForm 
-      password={this.state.password}
-      email={this.state.email}
-      onChange={this.onChange}
-      login={this.signIn}
-      google={this.signInWithGoogle}
-      error={this.state.error}
-      /> : null }
-      
-      
-      
-      {this.state.user &&  <div className="form-group">
-     <p> { anime } </p> 
-      </div> }
-      </Container>
-      </div>
-    );
-  }
-}
-
-export default App;
+        export default App;
+        

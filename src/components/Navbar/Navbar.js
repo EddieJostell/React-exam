@@ -16,19 +16,19 @@ class Navbar extends Component {
         return (
             <div className="row">
             <div className="col-md-6 page-title">
-            <h2>Welcome to AnimeOnline! </h2>
+            <h2>Welcome to AnimeOnline! {this.props.user.email} </h2>
             </div>
             
             <div className="col-md-6 react-logo">
             
-            {!userState && <input 
+            { !userState && <input 
                 name="logBtn"
                 className="btn btn-outline-primary" 
                 type="button" 
                 value="Register" 
                 onClick={this.props.regBtn}
                 /> }
-                {!userState &&  <input 
+                { !userState &&  <input 
                     className="btn btn-outline-success" 
                     type="button" 
                     value="Login"
@@ -42,7 +42,13 @@ class Navbar extends Component {
                         value="Sign out" onClick={this.props.signOut } 
                         
                         /> }
-                        </div>
+
+                      { !userState && <input 
+                        onClick={this.props.google} 
+                        type="button" 
+                        value="Sign in with Google" 
+                        className="btn btn-light"/> }
+                        </div> 
                         </div> //END OF ROW
                     );
                 }
