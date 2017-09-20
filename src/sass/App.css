@@ -53,6 +53,26 @@ h1 {
   color: red; }
 
 .media {
-  color: white;
-  border: 1px solid red;
-  margin-top: 5px; }
+  margin: 0 auto;
+  color: black;
+  margin-top: 5px;
+  background-color: white;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  .media h5 {
+    background-color: white;
+    font-family: Roboto; }
+  .media p {
+    overflow-wrap: break-word;
+    background-color: white;
+    color: green; }
+  .media .boxshadow {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+
+.pt-15 {
+  padding-top: 15px !important;
+  padding-right: 15px !important;
+  padding-bottom: 15px !important;
+  padding-left: 15px !important; }
+
+.form-check-label {
+  color: white; }

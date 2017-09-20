@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../firebase.js';
+import SettingsForm from '../Forms/SettingsForm.js';
 import ListHolder from '../ListHolder/ListHolder.js';
 
 export default class MainContent extends Component {
@@ -34,11 +35,15 @@ export default class MainContent extends Component {
         fetch(URL)
         .then(response => response.json()) 
         /*  .then(data => console.log(data))  */        
-        .then(data => {console.log(data), this.setState({animeList: data}) })
+        .then(data => {console.log(data), this.setState({animeList: data}), this.postToFirebase(data) })
         .catch(error => console.log(error))
         
     }
     
+    postToFirebase = (data) => {
+        console.log(data);
+      /* firebase.database().ref(`/anime`).push(data); */
+    }
     
     componentDidMount() {
         this.fetchPostToApi();
@@ -53,7 +58,9 @@ export default class MainContent extends Component {
         img={ani.image_url_med} 
         series_type={ani.series_type}
         genres={ani.genres}
-        />)
+        score={ani.average_score}
+        type={ani.type}
+        />);
         
         
         return (
@@ -61,48 +68,9 @@ export default class MainContent extends Component {
             <div className="row">
             <div className="rightContent col-md-3">
             
-            <form>
-            
-            <section className="form-group">
-            <label htmlFor="title">
-            Search by title
-            </label>
-            <input type="text" className="form-control" name="title" placeholder="Press Enter to Search" />
-            </section> 
-            
-            <section className="form-group">
-            <label htmlFor="genre">
-            Search by Genre
-            </label>
-            <select 
-            name="select"
-            className="form-control"
-            value={this.state.select}
-            >
-            <option value="Genres">= Genres = </option>
-            <option value="Adventure">Adventure</option>
-            <option value="Action">Action</option>
-            <option value="Comedy">Comedy</option>            
-            <option value="Crime">Crime</option>
-            <option value="Drama">Drama</option>
-            <option value="Ecchi">Ecchi</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="Horror">Horror</option>
-            <option value="Mecha">Mecha</option>
-            <option value="Music">Music</option>
-            <option value="Mystery">Mystery</option>
-            <option value="Psychological">Psychological</option>
-            <option value="Romance">Romance</option>
-            <option value="Sports">Sports</option>
-            <option value="Supernatural">Supernatural</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Slice of Life">Slice of Life</option>
-            <option value="Thriller">Thriller</option>
-            </select>
-            </section>
-            
-            </form>
+            <SettingsForm />
             </div>
+
             <div className="leftContent col-md-9">
             <h1> ANIME GOES HERE!! </h1>
             {amazeList}
