@@ -16,6 +16,27 @@ class LoginForm extends Component {
            
             <div style={{maxWidth: "50%", margin: "5rem auto"}}>
             <form onChange={this.props.onChange}>
+
+            <div className={`form-group ${hasError}`}>
+            <label htmlFor="username">
+            Username
+            </label>
+            <input 
+            type="text"
+            className="form-control"
+            name="username"
+            placeholder="Enter Username"
+            onChange={this.props.onChange}
+            value={this.props.username}
+            />
+            
+            { this.state.error && 
+                <div className="form-control-feedback">
+                Sorry, Wrong username you suck!
+                </div>}
+                
+                </div>
+
             <div className={`form-group ${hasError}`}>
             <label htmlFor="email">
             E-mail
@@ -54,7 +75,13 @@ class LoginForm extends Component {
                     Sorry, that Password's not right. You suck!
                     </div>}
                     </div>
-                    <input onClick={this.props.register} type="submit" value="Register" className="btn btn-primary"/>
+                    <input onClick={this.props.register} 
+                    type="submit" value="Register" 
+                    className="btn btn-primary"/>
+                    <span> </span>
+                    <input onClick={this.props.cancel} 
+                    type="button" value="Cancel" 
+                    className="btn btn-outline-danger"/>
                     </form>
                     </div>
                 )

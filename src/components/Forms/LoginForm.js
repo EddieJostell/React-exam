@@ -54,13 +54,14 @@ class LoginForm extends Component {
                     Sorry, that Password's not right. You suck!
                     </div>}
                     </div>
-                   {/*  <input onClick={this.props.register} type="submit" value="Register" className="btn btn-primary"/> */}
+                
                     <input 
                     onClick={this.props.login} 
                     type="submit" 
                     value="Login" 
                     className="btn btn-success"/>
-                   {/*  <input onClick={this.props.google} type="submit" value="Sign in with Google" className="btn btn-outline-primary"/> */}
+                    <span> </span>
+                    <input onClick={this.props.cancel} type="button" value="Cancel" className="btn btn-outline-danger"/> 
                     </form>
                     </div>
                 )
