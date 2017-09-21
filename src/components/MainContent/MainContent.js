@@ -16,7 +16,7 @@ export default class MainContent extends Component {
         sortGenre: [],
     }
     
-      fetchPostToApi = () => {
+    fetchPostToApi = () => {
         
         let postURL = 
         "https://anilist.co/api/auth/access_token?grant_type=client_credentials&client_id=eduardoj-lqksr&client_secret=dCd2I1SAbGIHl0dhql82ReB2rN"
@@ -44,34 +44,34 @@ export default class MainContent extends Component {
         .catch(error => console.log(error))
         
     }
-
+    
     findMovieByInput = (e) => {
         this.setState({ [e.target.name] : e.target.value })
     }
-
-     showMovieByTitle = (e) => {
+    
+    showMovieByTitle = (e) => {
         if (e.key === "Enter") {
-         console.log("WORKING");
-           const find = this.state.animeList.filter(function(anim) {
-             
-               return anim.title_romanji === e.target.value;
-           });
-           this.setState({ animeL : find})
+            console.log("WORKING");
+            const find = this.state.animeList.filter(function(anim) {
+                
+                return anim.title_romaji === e.target.value;
+            });
+            this.setState({ animeL : find})
         }
     } 
-
+    
     onGenre = (e) => {
         this.setState({[e.target.name] : e.target.value})
-
+        
         const filtByGenre = this.state.animeList.filter(function(filter) {
             return filter.genres.includes(e.target.value);
         });
         this.setState({sortGenre : filtByGenre}); 
-     
-          
+        
+        
     }
     
-   
+    
     
     componentDidMount() {
         
@@ -80,7 +80,7 @@ export default class MainContent extends Component {
     
     render() {
         console.log(this.state.sortGenre);
-
+        
         const amazeList = this.state.animeList.map( (ani, key) =>
         <ListHolder key={key} 
         title={ani.title_romaji} 
@@ -93,49 +93,57 @@ export default class MainContent extends Component {
         />);
         
         const sortedAni = this.state.animeL.map( (a, key) => 
-            <ListHolder key={key} 
-            title={a.title_romaji} 
-            episodes={a.total_episodes}
-            img={a.image_url_med} 
-            series_type={a.series_type}
-            genres={a.genres}
-            score={a.average_score}
-            type={a.type}
-            /> 
-        ) 
-
-        const genres = this.state.sortGenre.map( (cow, key) =>
         <ListHolder key={key} 
-        title={cow.title_romaji} 
-        episodes={cow.total_episodes}
-        img={cow.image_url_med} 
-        series_type={cow.series_type}
-        genres={cow.genres}
-        score={cow.average_score}
-        type={cow.type}
+        title={a.title_romaji} 
+        episodes={a.total_episodes}
+        img={a.image_url_med} 
+        series_type={a.series_type}
+        genres={a.genres}
+        score={a.average_score}
+        type={a.type}
         /> 
-    )
+    ) 
+    
+    const genres = this.state.sortGenre.map( (cow, key) =>
+    <ListHolder key={key} 
+    title={cow.title_romaji} 
+    episodes={cow.total_episodes}
+    img={cow.image_url_med} 
+    series_type={cow.series_type}
+    genres={cow.genres}
+    score={cow.average_score}
+    type={cow.type}
+    /> 
+)
 
-        return (
-            
-            <div className="row">
-            <div className="rightContent col-md-3">
-            
-            <SearchByTitle
-            find={this.findMovieByInput} 
-            enter={this.showMovieByTitle}/>
-
-            <SearchByGenre
-            onGenre={this.onGenre} />
-            </div>
-
-            <div className="leftContent col-md-9">
-            <h1> ANIME GOES HERE!! </h1>
-            {amazeList}
-            {sortedAni}
-            {genres}
-            </div>
-            </div> //END OF ROW
-        );
-    }
+return (
+    
+    <div className="row">
+    <div className="rightContent col-md-3">
+    
+    <SearchByTitle
+    find={this.findMovieByInput} 
+    enter={this.showMovieByTitle}/>
+    
+    <SearchByGenre
+    onGenre={this.onGenre} />
+    </div>
+    
+    <div className="leftContent col-md-9">
+    <h1> ANIME GOES HERE!! </h1>
+    <div className="row">
+    <div className="1">
+    {amazeList}
+    </div>
+    <div className="2">
+    {sortedAni}
+    </div>
+    <div className="3">
+    {genres}
+    </div>
+    </div>
+    </div>
+    </div> //END OF ROW
+);
+}
 }

@@ -45,13 +45,13 @@ class SearchByGenre extends Component {
             <section className="form-check">
             <label htmlFor="tv" className="form-check-label">
             <span> </span>
-            <input className="form-check-input" type="checkbox" value="tv" />
+            <input className="form-check-input" type="checkbox" name="tv" value={this.state.tv} />
             TV
             </label>
             <span> </span>
             <label htmlFor="movie" className="form-check-label">
                 <span> </span>
-            <input className="form-check-input" type="checkbox" value="movie" />
+            <input className="form-check-input" type="checkbox" name="movie" value={this.state.movie}/>
            Movie
             </label>
             </section>
