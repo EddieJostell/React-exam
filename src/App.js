@@ -9,7 +9,6 @@ import WelcomePage from './components/WelcomePage/WelcomePage.js';
 import './sass/App.css';
 
 const db = firebase.database();
-/* const auth = firebase.auth(); */
 
 class App extends Component {
   
@@ -55,6 +54,7 @@ class App extends Component {
   
   onSubmit = (e) => {
     e.preventDefault();
+    /* this.setState({ error: false}) */
     firebase.auth()
     .createUserWithEmailAndPassword(this.state.regemail, this.state.regpassword)
     .then((user) => {
@@ -69,7 +69,7 @@ class App extends Component {
     .then((user) => {
       alert("Welcome to HELL!");
     })
-    .catch(error => alert(error.message), error => console.log(error))
+    .catch( error => console.log(error))
  
     
     
@@ -105,6 +105,7 @@ class App extends Component {
   
   signIn = (e) => {
     e.preventDefault();
+   /*  this.setState({ error: false}) */
     firebase.auth()
     .signInWithEmailAndPassword(this.state.email, this.state.password)
     .then(user => console.log("SIGNED IN!"))
@@ -128,7 +129,6 @@ class App extends Component {
   
   
   signInWithGoogle = () => {
-    console.log("HEJ");
     var provider = new firebase.auth.GoogleAuthProvider();
     
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -142,16 +142,16 @@ class App extends Component {
       .set({ 
         email: user.email, 
         uid: user.uid,
-      username: user.displayName})
+        username: user.displayName})
 
     }).catch(function(error) {
       // Handle Errors here.
-      /* var errorCode = error.code;
-      var errorMessage = error.message; */
+      var errorCode = error.code;
+      var errorMessage = error.message;
       // The email of the user's account used.
-     /*  var email = error.email; */
+      var email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-     /*  var credential = error.credential; */
+      var credential = error.credential;
       // ...
     });
   }
@@ -161,17 +161,6 @@ class App extends Component {
   }
   
   render() {
-    
-/*     const anime = this.state.animeList.map( (ani, key) => 
-    <div key={key}>
-    
-    <img src={ani.image_url_lge} />
-    <p> {ani.id} </p>
-    <p> {ani.title_romaji} || {ani.title_english} </p> 
-    <p> {ani.series_type} </p>
-    <p> {ani.airing_status} </p>
-    <p> {ani.genres} </p>
-    </div>) */
     
     return (
       <div className="App">

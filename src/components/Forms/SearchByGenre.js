@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-export default class SettingsForm extends Component {
-    state = { 
-        
-     }
-    
+class SearchByGenre extends Component {
+   
+
+    state= {
+        select: ''
+    }
+
     render() {
         return (
-            <form>
-            
-            <section className="form-group">
-            <label htmlFor="title">
-            Search by Title
-            </label>
-            <input type="text" className="form-control" name="title" placeholder="Press Enter to Search" />
-            </section> 
-            
+         <div>
             <section className="form-group">
             <label htmlFor="genre">
-            Search by Genre
+            <h4> Search by Genre </h4>
             </label>
             <select 
+            onChange={this.props.onGenre}
             name="select"
             className="form-control"
             value={this.state.select}
@@ -61,7 +56,9 @@ export default class SettingsForm extends Component {
             </label>
             </section>
             
-            </form>  
+           </div>
         );
     }
 }
+
+export default SearchByGenre;
