@@ -79,7 +79,14 @@ class App extends Component {
     firebase.auth()
     .onAuthStateChanged((user) => {
       if(user) {
-        this.setState({user: user})
+
+        const userCred = {
+          uid: user.uid,
+          email: user.email,
+          username: user.displayName
+        }
+    
+        this.setState({user: user, user: userCred})
 
         if(user.displayName) {
           
@@ -177,7 +184,10 @@ class App extends Component {
       </div> {/* END OF App-Header*/}
       <Container>
        {!this.state.user && <WelcomePage /> }
-     {this.state.user && <MainContent /> }
+     {this.state.user && <MainContent 
+     user={this.state.user}
+     
+     /> }
       { ( !this.state.user && this.state.regVisible) ? <RegForm 
         regpassword={this.state.regpassword}
         regemail={this.state.regemail}

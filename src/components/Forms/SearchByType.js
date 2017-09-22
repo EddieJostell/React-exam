@@ -1,13 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class SearchByGenre extends Component {
+function SearchByType (props) {
    
-
-    state= {
-        select: ''
-    }
-
-    render() {
         return (
          <div>
             <section className="form-group">
@@ -15,16 +9,16 @@ class SearchByGenre extends Component {
             <h4> Search by Genre </h4>
             </label>
             <select 
-            onChange={this.props.onGenre}
+            onChange={props.onGenre}
             name="select"
             className="form-control"
-            value={this.state.select}
+            
             >
             <option value="Genres">= Genres = </option>
             <option value="Adventure">Adventure</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>            
-            <option value="Crime">Crime</option>
+           {/*  <option value="Crime">Crime</option> */}
             <option value="Drama">Drama</option>
             <option value="Ecchi">Ecchi</option>
             <option value="Fantasy">Fantasy</option>
@@ -42,23 +36,48 @@ class SearchByGenre extends Component {
             </select>
             </section>
             
-            <section className="form-check">
+
+            <section className="form-group">
+            <label htmlFor="genre">
+            <h4> Search by Type of Show</h4>
+            </label>
+            <select 
+            onChange={props.onType}
+            name="selectType"
+            className="form-control"
+            
+            >
+            <option value="Type of Show">= Type of Show = </option>
+            <option value="TV">TV</option>
+            <option value="Movie">Movie</option>
+            </select>
+            </section>
+
+            {/* <section className="form-check">
             <label htmlFor="tv" className="form-check-label">
             <span> </span>
-            <input className="form-check-input" type="checkbox" name="tv" value={this.state.tv} />
+            <input
+             className="form-check-input" 
+             type="checkbox" name="tv" 
+             onChange={props.checktv} tvchecked={props.tv} />
             TV
             </label>
             <span> </span>
             <label htmlFor="movie" className="form-check-label">
                 <span> </span>
-            <input className="form-check-input" type="checkbox" name="movie" value={this.state.movie}/>
+            <input 
+            className="form-check-input" 
+            type="checkbox" 
+            name="movie"
+            onChange={props.checkmovie} moviechecked={props.movie} 
+           />
            Movie
             </label>
-            </section>
+            </section> */}
             
            </div>
         );
     }
-}
 
-export default SearchByGenre;
+
+export default SearchByType;

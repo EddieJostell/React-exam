@@ -17,8 +17,8 @@ class Navbar extends Component {
         return (
             <div className="row">
             <div className="col-md-6 page-title">
-            <h2>Anime Haven</h2>
-            {userState && <h2> {userName}  </h2> }
+           {!userState && <h2>Anime Haven</h2> }
+            {userState && <h2>Welcome to Anime Haven! {userName}  </h2> }
             </div>
             
             <div className="col-md-6 react-logo">

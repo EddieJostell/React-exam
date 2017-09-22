@@ -28,11 +28,11 @@ body {
 
 .App-header {
   background-color: #222;
-  height: 200px;
+  height: auto;
   padding: 20px;
   color: white;
-  background-image: url("../img/field.jpg");
-  background-repeat: no-repeat; }
+  /*  background-image: url("../img/field.jpg");
+    background-repeat: no-repeat; */ }
 
 .App-intro {
   font-size: large; }
@@ -53,27 +53,28 @@ h1 {
 .welcome {
   color: red; }
 
-.media {
+.media1 {
   margin: 0 auto;
   color: black;
   margin-top: 5px;
   background-color: white;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-  .media h5 {
-    background-color: white;
+  .media1 h5 {
     font-family: Roboto; }
-  .media p {
+  .media1 p {
     overflow-wrap: break-word;
-    background-color: white;
     color: green; }
-  .media .boxshadow {
+  .media1 .boxshadow {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
 .pt-15 {
   padding-top: 15px !important;
   padding-right: 15px !important;
   padding-bottom: 15px !important;
-  padding-left: 15px !important; }
+  /* 	padding-left: 15px !important; */ }
+
+.textarea {
+  border-radius: 5px; }
 
 .form-check-label {
   color: white; }
