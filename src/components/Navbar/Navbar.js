@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import SignOutButton from '../BootstrapButtons/SignOutButton';
 
 class Navbar extends Component {
     state = { 
@@ -37,13 +37,14 @@ class Navbar extends Component {
                     name="regBtn"
                     onClick={this.props.logBtn}
                     /> }
+                   
                     
-                    {userState && <input
+                    {userState &&  <input
                         className="btn btn-danger" 
                         type="button" 
-                        value="Sign out" onClick={this.props.signOut } 
+                        value="Sign out" onClick={this.props.signOut } /> }
                         
-                        /> }
+                        
 
                       { !userState && <input 
                         onClick={this.props.google} 

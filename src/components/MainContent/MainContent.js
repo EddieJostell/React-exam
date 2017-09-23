@@ -199,6 +199,7 @@ class MainContent extends Component {
         score={ani.average_score}
         type={ani.type}
         onSubmit={this.addComment}
+        onChange={this.onChange}
         />);
         
         const sortedAni = this.state.animeL.map( (a, key) => 
@@ -211,6 +212,7 @@ class MainContent extends Component {
         score={a.average_score}
         type={a.type}
         onSubmit={this.addComment}
+        onChange={this.onChange}
         />) 
         
         const genres = this.state.sortGenre.map( (cow, key) =>
@@ -225,6 +227,7 @@ class MainContent extends Component {
         id={cow.id}
         onSubmit={this.addComment}
         commentVal={this.props.commentVal}
+        onChange={this.onChange}
         />)
         
         const mediaType = this.state.listByType.map( (t, key) => 
@@ -237,7 +240,7 @@ class MainContent extends Component {
         score={t.average_score}
         type={t.type}
         onSubmit={this.addComment}
-        
+        onChange={this.onChange}
         />)
         
         

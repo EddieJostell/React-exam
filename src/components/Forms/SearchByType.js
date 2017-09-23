@@ -51,30 +51,7 @@ function SearchByType (props) {
             <option value="TV">TV</option>
             <option value="Movie">Movie</option>
             </select>
-            </section>
-
-            {/* <section className="form-check">
-            <label htmlFor="tv" className="form-check-label">
-            <span> </span>
-            <input
-             className="form-check-input" 
-             type="checkbox" name="tv" 
-             onChange={props.checktv} tvchecked={props.tv} />
-            TV
-            </label>
-            <span> </span>
-            <label htmlFor="movie" className="form-check-label">
-                <span> </span>
-            <input 
-            className="form-check-input" 
-            type="checkbox" 
-            name="movie"
-            onChange={props.checkmovie} moviechecked={props.movie} 
-           />
-           Movie
-            </label>
-            </section> */}
-            
+            </section>          
            </div>
         );
     }

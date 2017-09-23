@@ -6,6 +6,7 @@ import RegForm from './components/Forms/RegForm.js';
 import Navbar from './components/Navbar/Navbar.js';
 import MainContent from './components/MainContent/MainContent.js';
 import WelcomePage from './components/WelcomePage/WelcomePage.js';
+import SignOutButton from './components/BootstrapButtons/SignOutButton.js';
 import './sass/App.css';
 
 const db = firebase.database();
@@ -184,10 +185,10 @@ class App extends Component {
       </div> {/* END OF App-Header*/}
       <Container>
        {!this.state.user && <WelcomePage /> }
-     {this.state.user && <MainContent 
+        {this.state.user && <MainContent 
      user={this.state.user}
      
-     /> }
+        /> }
       { ( !this.state.user && this.state.regVisible) ? <RegForm 
         regpassword={this.state.regpassword}
         regemail={this.state.regemail}
