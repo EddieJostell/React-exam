@@ -182,12 +182,12 @@ class MainContent extends Component {
     
     render() {
 
-        const allAniList = this.state.animeList.map( (elem, key) => {
+       /*  const allAniList = this.state.animeList.map( (elem, key) => {
             
             if(this.state.tInput) {
 
             }
-        })
+        }) */
  
         const amazeList = this.state.animeList.map( (ani, key) =>
         <ListHolder key={ani.key} 
@@ -202,9 +202,9 @@ class MainContent extends Component {
         onChange={this.onChange}
         commentVal={this.props.commentVal}
         id={ani.id}
-        />);
+        />)
         
-        const sortedAni = this.state.animeL.map( (a, key) => 
+        const titleAni = this.state.animeL.map( (a, key) => 
         <ListHolder key={a.key} 
         title={a.title_romaji} 
         episodes={a.total_episodes}
@@ -273,18 +273,20 @@ class MainContent extends Component {
             <div className="rightContent col-md-10">
            {/*  <h1> ANIME GOES HERE!! </h1> */}
            {/* <h5> {comments} </h5> */}
-           {allAniList}
-           {/*  {genres} */}
+           {genres}
+          {/*  { (!this.state.animeList && !this.state.selectType && !this.state.tInput) ? {genres} : null } */}
             <div className="row">
             <div className="one">
-            {/* {amazeList} */}
-           {/*  {mediaType} */}
+            {/* { (!this.state.tInput && !this.state.select && !this.state.selectType) ? {amazeList} : null } */}
+            {amazeList}
             </div>
             <div className="two">
-           {/*  {sortedAni} */}
+                {titleAni}
+           {/* { (!this.state.animeList && !this.state.select && !this.state.selectType) ?  {titleAni} : null } */}
             </div>
             <div className="three">
-            
+                {mediaType}
+           {/*  { (!this.state.animeList && !this.state.select && !this.state.title) ? mediaType : null } */}
             </div>
             </div> {/*END OF INNER ROW*/}
             </div>
