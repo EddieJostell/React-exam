@@ -16,12 +16,12 @@ class Navbar extends Component {
         
         return (
             <div className="row">
-            <div className="col-md-6 page-title">
+            <div className="col-md-9 page-title ml-auto">
            {!userState && <h2>Anime Haven</h2> }
             {userState && <h2>Welcome to Anime Haven! {userName}  </h2> }
             </div>
             
-            <div className="col-md-6 react-logo">
+            <div className="col-md-3 react-logo mr-auto">
             
             { !userState && <input 
                 name="logBtn"
@@ -38,19 +38,20 @@ class Navbar extends Component {
                     onClick={this.props.logBtn}
                     /> }
                    
-                    
-                    {userState &&  <input
-                        className="btn btn-danger" 
-                        type="button" 
-                        value="Sign out" onClick={this.props.signOut } /> }
-                        
-                        
-
                       { !userState && <input 
                         onClick={this.props.google} 
                         type="button" 
                         value="Sign in with Google" 
                         className="btn btn-link buttons"/> }
+
+                         
+                    {userState &&  <input
+                        className="btn btn-link buttons" 
+                        type="button" 
+                        value="Sign out" onClick={this.props.signOut } /> }
+
+                        {/* <SignOutButton danger title="Sign Out"/> */}
+                        
                         </div> 
                         </div> //END OF ROW
                     );

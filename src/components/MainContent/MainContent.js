@@ -3,7 +3,7 @@ import firebase from '../../firebase.js';
 import SearchByTitle from '../Forms/SearchByTitle';
 import SearchByType from '../Forms/SearchByType';
 import ListHolder from '../ListHolder/ListHolder.js';
-
+import CommentHolder from '../CommentHolder/CommenHolder.js';
 
 
 
@@ -18,7 +18,8 @@ class MainContent extends Component {
         anime: [],
         selectType: '',
         listByType: [],
-        commentVal: ''
+        commentVal: '',
+        comments: []
     }
     
     componentDidMount() {
@@ -26,6 +27,7 @@ class MainContent extends Component {
         /* this.childChanged();
         this.childRemoved(); */
         this.fetchPostToApi(); 
+        this.showCommentFromDb();
     }
     
     
@@ -137,60 +139,58 @@ class MainContent extends Component {
             return sort.type === e.target.value;
         });
         this.setState({listByType : showByType});
-        
-        
-        /*  firebase.database()
-        .ref(`anime`)
-        .orderByChild('type')
-        .equalTo('TV')
-        .on('child_added', (snapshot) =>{
-            const newType = [...this.state.anime];
-            newType.push(snapshot.val());
-            this.setState({anime : newType});
-        })*/
     }
     
     onChange = (e) => {
-        this.setState[{ [e.target.name] : e.target.value }]
+        this.setState({ [e.target.name] : e.target.value })
+       
     }
-    
-    
+
     addComment = (id) => {
         const user = firebase.auth().currentUser;
-        
         
         console.log('button works anyhow');
         console.log(id);
         console.log("commentVal should go here -> " + " " + this.state.commentVal);
         const objectToPush = {
-            name: this.state.commentVal,
+            text: this.state.commentVal,
             uid: user.uid,
-            aniID: id
+            aniID: id,
+            username: user.displayName
         }
         
         firebase.database().ref(`comments`).push(objectToPush)
         .then(() => {console.log("Pushed to Firebase/comments")})
         .catch(error => {console.log('messed up', error)})
+
+        this.showCommentFromDb();
     }
     
-    /*  showTV = () => {
+      showCommentFromDb = () => {
         
         firebase.database()
-        .ref(`anime`)
-        .orderByChild('type')
-        .equalTo('TV')
+        .ref(`comments`)
+        .orderByChild('text')
+        .equalTo('aniID')
         .on('child_added', (snapshot) =>{
-            const newType = [...this.state.anime];
+            const newType = [...this.state.comments];
             newType.push(snapshot.val());
-            this.setState({anime : newType});
+            this.setState({comments : newType});
         })
-    } */
+    } 
     
     
     render() {
-        
+
+        const allAniList = this.state.animeList.map( (elem, key) => {
+            
+            if(this.state.tInput) {
+
+            }
+        })
+ 
         const amazeList = this.state.animeList.map( (ani, key) =>
-        <ListHolder key={key} 
+        <ListHolder key={ani.key} 
         title={ani.title_romaji} 
         episodes={ani.total_episodes}
         img={ani.image_url_med} 
@@ -200,10 +200,12 @@ class MainContent extends Component {
         type={ani.type}
         onSubmit={this.addComment}
         onChange={this.onChange}
+        commentVal={this.props.commentVal}
+        id={ani.id}
         />);
         
         const sortedAni = this.state.animeL.map( (a, key) => 
-        <ListHolder key={key} 
+        <ListHolder key={a.key} 
         title={a.title_romaji} 
         episodes={a.total_episodes}
         img={a.image_url_sml} 
@@ -213,10 +215,11 @@ class MainContent extends Component {
         type={a.type}
         onSubmit={this.addComment}
         onChange={this.onChange}
+        id={a.id}
         />) 
         
         const genres = this.state.sortGenre.map( (cow, key) =>
-        <ListHolder key={key} 
+        <ListHolder key={cow.key} 
         title={cow.title_romaji} 
         episodes={cow.total_episodes}
         img={cow.image_url_lge} 
@@ -226,28 +229,35 @@ class MainContent extends Component {
         type={cow.type}
         id={cow.id}
         onSubmit={this.addComment}
-        commentVal={this.props.commentVal}
         onChange={this.onChange}
+
         />)
         
         const mediaType = this.state.listByType.map( (t, key) => 
-        <ListHolder key={key} 
+        <ListHolder key={t.key} 
         title={t.title_romaji} 
         episodes={t.total_episodes}
-        img={t.image_url_med} 
+        img={t.image_url_lge} 
         series_type={t.series_type}
         genres={t.genres}
         score={t.average_score}
         type={t.type}
         onSubmit={this.addComment}
         onChange={this.onChange}
+        id={t.id}
+        />) 
+
+        const comments = this.state.comments.map( (c, key) => 
+        <CommentHolder key={c.aniID}
+        id={c.uid}
+        aniID={c.aniID}
+        text={c.text}
+        username={c.username}
         />)
-        
-        
-        
+
         return (
             <div className="row">
-            <div className="rightContent col-md-2">
+            <div className="leftContent col-md-2">
             <br>
             </br>
             <SearchByTitle
@@ -260,18 +270,20 @@ class MainContent extends Component {
             />
             </div>
             
-            <div className="leftContent col-md-10">
-            <h1> ANIME GOES HERE!! </h1>
-            {genres}
+            <div className="rightContent col-md-10">
+           {/*  <h1> ANIME GOES HERE!! </h1> */}
+           {/* <h5> {comments} </h5> */}
+           {allAniList}
+           {/*  {genres} */}
             <div className="row">
-            <div className="1">
-            {/*  {amazeList} */}
-            {mediaType}
+            <div className="one">
+            {/* {amazeList} */}
+           {/*  {mediaType} */}
             </div>
-            <div className="2">
-            {sortedAni}
+            <div className="two">
+           {/*  {sortedAni} */}
             </div>
-            <div className="3">
+            <div className="three">
             
             </div>
             </div> {/*END OF INNER ROW*/}

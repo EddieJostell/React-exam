@@ -4,7 +4,7 @@ function SearchByType (props) {
    
         return (
          <div>
-            <section className="form-group">
+            <section className="form-group flexForms">
             <label htmlFor="genre">
             <h4> Search by Genre </h4>
             </label>
@@ -18,7 +18,6 @@ function SearchByType (props) {
             <option value="Adventure">Adventure</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>            
-           {/*  <option value="Crime">Crime</option> */}
             <option value="Drama">Drama</option>
             <option value="Ecchi">Ecchi</option>
             <option value="Fantasy">Fantasy</option>
@@ -38,8 +37,8 @@ function SearchByType (props) {
             
 
             <section className="form-group">
-            <label htmlFor="genre">
-            <h4> Search by Type of Show</h4>
+            <label htmlFor="selectType">
+            <h4 className="show"> Search by Type </h4>
             </label>
             <select 
             onChange={props.onType}
@@ -48,7 +47,7 @@ function SearchByType (props) {
             
             >
             <option value="Type of Show">= Type of Show = </option>
-            <option value="TV">TV</option>
+            <option value="TV">TV-Show</option>
             <option value="Movie">Movie</option>
             </select>
             </section>          

@@ -61,7 +61,12 @@ class LoginForm extends Component {
                     value="Login" 
                     className="btn btn-success"/>
                     <span> </span>
-                    <input onClick={this.props.cancel} type="button" value="Cancel" className="btn btn-outline-danger"/> 
+
+                    <input 
+                    onClick={this.props.cancel} 
+                    type="button" 
+                    value="Cancel" 
+                    className="btn btn-outline-danger"/> 
                     </form>
                     </div>
                 )

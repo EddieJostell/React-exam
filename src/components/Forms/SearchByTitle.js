@@ -3,7 +3,7 @@ import React from 'react';
 const SearchByTitle = (props) => {
 
     return(
-        <section className="form-group">
+        <section className="form-group flexForms">
         <label htmlFor="tInput">
         <h4> Search by Title </h4>
         </label>

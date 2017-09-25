@@ -24,9 +24,37 @@
   padding-top: 15px !important;
   padding-right: 15px !important;
   padding-bottom: 15px !important;
-/* 	padding-left: 15px !important; */
+	padding-left: 15px !important;
 }
 
 .textarea {
- border-radius: 5px;
+  border-radius: 5px;
+ 
+}
+
+.card {
+  background-color: #2b2d42;
+  color: #edf2f4;
+}
+
+.showAnime {
+  height: auto;
+	margin: 0.5rem 5px 35px 0;
+	display: inline-block;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  
+  h4 {
+    text-align: center;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  p {
+    overflow-wrap: break-word;
+    color: green;
+    text-align: center;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
 }

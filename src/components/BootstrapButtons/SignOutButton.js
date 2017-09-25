@@ -1,5 +1,5 @@
 import React from 'react';
-import  soBtn from '../Buttons/soBtn';
+import soBtn from '../Buttons/soBtn';
 
 function SignOutButton(props) {
    return(

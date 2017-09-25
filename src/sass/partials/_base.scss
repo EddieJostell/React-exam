@@ -1,10 +1,10 @@
-
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 .App {
-    text-align: center;
+    /* text-align: center; */
   }
   
   body {
-    background-color: #222222;
+    background-color: #edf2f4;
   }
   
   * {
@@ -13,16 +13,16 @@
     box-sizing: border-box;
   }
   
-  .App-logo {
+ /*  .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
-  }
+  } */
   
   .App-header {
-    background-color: #222;
+    background-color: #edf2f4;
     height: auto;
     padding: 20px;
-    color: white;
+    color: #d90429;
    /*  background-image: url("../img/field.jpg");
     background-repeat: no-repeat; */
   }
