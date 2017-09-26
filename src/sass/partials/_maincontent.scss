@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 .rightContent {
-    height: 500px;
+    height: 1000px;
     border: 1px solid green;
     -webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -15,7 +15,7 @@
 .leftContent {
     border: 1px solid red;
     width:100%;
-    height: auto;   
+    height: 1000px;   
     display: flex;
 	flex-direction: column;
 	align-items: center;

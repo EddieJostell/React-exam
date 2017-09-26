@@ -1,9 +1,10 @@
 import React from 'react';
-import soBtn from '../Buttons/soBtn';
+import Button from '../Buttons/Button.js';
 
 function SignOutButton(props) {
+    console.log(props);
    return(
-    <soBtn {...props} className="danger" />
+    <Button {...props} className="link" /> 
    )
 }
 

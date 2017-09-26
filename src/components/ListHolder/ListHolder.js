@@ -8,8 +8,6 @@ function ListHolder(props) {
     props.onSubmit(props.id);
   }
 
-
-
   return (
 
     <div className="col-md-3">
@@ -23,7 +21,7 @@ function ListHolder(props) {
     <p className="card-text"> Genres: {props.genres.join(",")} </p>
     <p className="card-text"> Average Score: {props.score} </p>
 
-    <form onSubmit={submit} className="form-group">
+    <form onSubmit={submit} className="form-group centerForm">
     <textarea
     className="textarea"
     onChange={props.onChange}
@@ -43,15 +41,8 @@ function ListHolder(props) {
     </form>
     
     <div>
-    <p> Comments goes here with help of a component </p>
-    <input 
-    className="btn btn-danger"
-    onClick={props.delComment} 
-    type="button"
-    value="Delete" 
-    />
     </div>
-
+    <CommentHolder delComment={props.delComment} daskey={props.dkey} text={props.text} aniID={props.aniID} username={props.username} id={props.uid} comments={props.comments} />  
     </div>
     </div> 
     </div>

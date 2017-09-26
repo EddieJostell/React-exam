@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+/* import soBtn from '../Buttons/soBtn.js'; */
 import SignOutButton from '../BootstrapButtons/SignOutButton';
 
 class Navbar extends Component {
@@ -50,7 +51,7 @@ class Navbar extends Component {
                         type="button" 
                         value="Sign out" onClick={this.props.signOut } /> }
 
-                        {/* <SignOutButton danger title="Sign Out"/> */}
+                      {userState &&   <SignOutButton link title="Sign Out" signOut={this.props.signOut}/> }
                         
                         </div> 
                         </div> //END OF ROW

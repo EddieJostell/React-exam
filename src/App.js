@@ -64,7 +64,7 @@ class App extends Component {
       .set({ 
         email: user.email,
          uid: user.uid,
-        username: this.state.username })
+        displayName: user.displayName })
     })
     .then((user) => {
       alert("Welcome to HELL!");

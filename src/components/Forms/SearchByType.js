@@ -49,6 +49,7 @@ function SearchByType (props) {
             <option value="Type of Show">= Type of Show = </option>
             <option value="TV">TV-Show</option>
             <option value="Movie">Movie</option>
+            <option value="OVA">OVA</option>
             </select>
             </section>          
            </div>
