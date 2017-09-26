@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import CancelButton from '../BootstrapButtons/CancelButton.js';
+import RegButton from '../BootstrapButtons/RegButton.js';
+
 class LoginForm extends Component {
     
     state = {
@@ -75,13 +78,17 @@ class LoginForm extends Component {
                     Sorry, that Password's not right. You suck!
                     </div>}
                     </div>
-                    <input onClick={this.props.register} 
+                  {/*   <input onClick={this.props.register} 
                     type="submit" value="Register" 
-                    className="btn btn-primary"/>
+                    className="btn btn-primary"/> */}
+
+                    <RegButton primary title="Register" onClick={this.props.register} />
                     <span> </span>
-                    <input onClick={this.props.cancel} 
+                  {/*   <input onClick={this.props.cancel} 
                     type="button" value="Cancel" 
-                    className="btn btn-outline-danger"/>
+                    className="btn btn-outline-danger"/> */}
+
+                    <CancelButton danger title="Cancel" onClick={this.props.cancel} />
                     </form>
                     </div>
                 )

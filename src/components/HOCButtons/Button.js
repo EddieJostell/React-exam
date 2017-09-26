@@ -2,10 +2,10 @@ import React from 'react';
 
  function soFUCKYOUButton(props) {
  
-           
-           const className = props.link ? 'btn btn-link' : 'btn'; 
+         
+           const className = props.danger ? 'btn btn-danger' : 'btn'; 
         return (
-            <button className={ className } name="link"  onClick={props.signOut}>
+            <button className={ className } onClick={props.onClick}>
                   {props.title}
                 </button>
         )

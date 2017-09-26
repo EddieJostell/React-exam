@@ -3,7 +3,7 @@ import firebase from '../../firebase.js';
 import SearchByTitle from '../Forms/SearchByTitle';
 import SearchByType from '../Forms/SearchByType';
 import ListHolder from '../ListHolder/ListHolder.js';
-import CommentHolder from '../CommentHolder/CommenHolder.js';
+
 
 
 
