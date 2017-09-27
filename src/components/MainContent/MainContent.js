@@ -13,14 +13,11 @@ class MainContent extends Component {
         select: '',
         animeList: [],
         tInput: '',
-        animeL: [],
-        sortGenre: [],
-        anime: [],
         selectType: '',
-        listByType: [],
         commentVal: '',
         comments: {},
-        delComment: ''
+        delComment: '',
+        showList: []
     }
     
     componentDidMount() {
@@ -104,7 +101,7 @@ class MainContent extends Component {
         .then(data => { 
         
         console.log(data);
-        this.setState({animeList: data});
+        this.setState({animeList: data, showList : data});
         this.showCommentFromDb();})
 
         .catch(error => console.log(error))
@@ -122,7 +119,7 @@ class MainContent extends Component {
                 
                 return anim.title_romaji.toUpperCase() === e.target.value.toUpperCase();
             });
-            this.setState({ animeL : find})
+            this.setState({ showList : find})
         }
     } 
     
@@ -132,7 +129,7 @@ class MainContent extends Component {
         const filtByGenre = this.state.animeList.filter(function(filter) {
             return filter.genres.includes(e.target.value);
         });
-        this.setState({sortGenre : filtByGenre}); 
+        this.setState({showList : filtByGenre}); 
         
         
     }
@@ -144,7 +141,7 @@ class MainContent extends Component {
         const showByType = this.state.animeList.filter(function(sort) {
             return sort.type === e.target.value;
         });
-        this.setState({listByType : showByType});
+        this.setState({showList: showByType});
     }
     
     onChange = (e) => {
@@ -173,23 +170,22 @@ class MainContent extends Component {
     }
     
       showCommentFromDb = () => {
-       /*  console.log(this.state.animeList.length); */
    
 
         const renderAniComments = [...this.state.animeList].map((elem) => {
-            console.log("HEJ IGEN")
-            let userName = '';
+          /*   console.log("HEJ IGEN") */
+            /* let userName = ''; */
           //  console.log(elem);
             firebase.database().ref(`comments/${elem.id}`).on('value', (snap) => {
              //  userName = snap.val().username;
           
                //console.log(elem.id);
-               console.log("Inside: " + elem.id);
+              /*  console.log("Inside: " + elem.id); */
                let newComment = [...this.state.comments];
                newComment[elem.id] = snap.val();
                this.setState({ comments: newComment})        
-            //    console.log(newComment);
-        
+               /* console.log(newComment[elem.id]);
+         */
             }) 
             
         });
@@ -197,25 +193,42 @@ class MainContent extends Component {
     } 
     
     deleteComment = (key) => {
-          
-             console.log("REMOVE COMMENT!");
-             firebase.database().ref(`comments`).remove()
-             .then(() =>{console.log("Removed!")})
-             .then(() =>{
-               const removed = this.state.comments.filter(item => item.key !== key);
-               this.setState({comments: removed});
-             })
-             .catch(error => {console.log('You messed up', error)})
-    }
+        console.log("REMOVE COMMENT!");
+ 
+          firebase.database().ref(`comments/`).remove()
+          .then(() =>{console.log("Removed!")})
+          .then(() =>{
+            const removed = this.state.comments.filter(item => item.key !== key);
+            this.setState({comments: removed});
+          })
+          .catch(error => {console.log('You messed up', error)})
+    } 
      
     
     
     render() {
-
+         
 
  
         //WHOLE LIST
-        const wholeList = this.state.animeList.map( (ani, key) => 
+        const wholeList  = this.state.showList.map( (ani, key) => 
+        <ListHolder key={key} 
+        title={ani.title_romaji} 
+        episodes={ani.total_episodes}
+        img={ani.image_url_lge} 
+        series_type={ani.series_type}
+        genres={ani.genres}
+        score={ani.average_score}
+        type={ani.type}
+        onSubmit={this.addComment}
+        onChange={this.onChange}
+        commentVal={this.props.commentVal}
+        id={ani.id}
+        comments={this.state.comments[key]}
+        delComment={this.deleteComment}
+        />)
+
+        const aniList  = this.state.animeList.map( (ani, key) => 
         <ListHolder key={key} 
         title={ani.title_romaji} 
         episodes={ani.total_episodes}
@@ -233,7 +246,7 @@ class MainContent extends Component {
         />)
         
         //SEARCH BY TITLE
-        const titleAni = this.state.animeL.map( (a, key) => 
+       /*  const titleAni = this.state.showList.map( (a, key) => 
         <ListHolder key={key} 
         title={a.title_romaji} 
         episodes={a.total_episodes}
@@ -250,7 +263,7 @@ class MainContent extends Component {
         />) 
         
         //GENRES
-        const genres = this.state.sortGenre.map( (cow, key) =>
+        const genres = this.state.showList.map( (cow, key) =>
         <ListHolder key={key} 
         title={cow.title_romaji} 
         episodes={cow.total_episodes}
@@ -267,7 +280,7 @@ class MainContent extends Component {
         />)
 
         //TV OR MOVIE
-        const mediaType = this.state.listByType.map( (t, key) => 
+        const mediaType = this.state.showList.map( (t, key) => 
         <ListHolder key={key} 
         title={t.title_romaji} 
         episodes={t.total_episodes}
@@ -282,7 +295,7 @@ class MainContent extends Component {
         comments={this.state.comments[key]}
         delComment={this.deleteComment}
         />) 
-
+ */
       
 
         return (
@@ -302,20 +315,11 @@ class MainContent extends Component {
             
             <div className="rightContent col-md-10">
            {/*  <h1> ANIME GOES HERE!! </h1> */}
-           {wholeList}
-           {genres}
+            {wholeList}
+         {/*   {genres}
            {titleAni}
-           {mediaType}
-          {/*  { (!this.state.animeList && !this.state.selectType && !this.state.tInput) ? {genres} : null } */}
-            
-            {/* { (!this.state.tInput && !this.state.select && !this.state.selectType) ? {amazeList} : null } */}
-          {/*   {wholeList} */}
+           {mediaType} */}
            
-               
-           {/* { (!this.state.animeList && !this.state.select && !this.state.selectType) ?  {titleAni} : null } */}
-           
-               
-           {/*  { (!this.state.animeList && !this.state.select && !this.state.title) ? mediaType : null } */}
            
             </div>
             </div> //END OF ROW

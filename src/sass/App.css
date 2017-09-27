@@ -10,21 +10,19 @@
   color: #d90429;
   margin: 0 auto; }
 
-.react-logo input {
-  margin-left: 30px; }
-
-.react-logo .btn-link:link {
-  text-decoration: none; }
-
-.react-logo .btn-link:active {
-  text-decoration: none; }
-
-.react-logo .btn-link:hover {
-  text-decoration: none;
-  color: #8d99ae; }
-
-.react-logo .btn-link:visited {
-  text-decoration: none; }
+.react-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; }
+  .react-logo .btn-link:link {
+    text-decoration: none; }
+  .react-logo .btn-link:active {
+    text-decoration: none; }
+  .react-logo .btn-link:hover {
+    text-decoration: none;
+    color: #8d99ae; }
+  .react-logo .btn-link:visited {
+    text-decoration: none; }
 
 .buttons {
   color: #d90429; }
@@ -55,6 +53,13 @@ body {
 .App-intro {
   font-size: large; }
 
+.errorMSG {
+  height: auto;
+  width: 350px;
+  margin: 0 auto; }
+  .errorMSG p {
+    color: red; }
+
 .rightContent {
   height: 1000px;
   border: 1px solid green;
@@ -69,7 +74,7 @@ body {
 .leftContent {
   border: 1px solid red;
   width: 100%;
-  height: 1000px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center; }
@@ -96,20 +101,6 @@ h1 {
   font-family: 'Raleway';
   color: #d90429; }
 
-.media1 {
-  margin: 0 auto;
-  color: black;
-  margin-top: 5px;
-  background-color: white;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-  .media1 h5 {
-    font-family: Roboto; }
-  .media1 p {
-    overflow-wrap: break-word;
-    color: green; }
-  .media1 .boxshadow {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-
 .pt-15 {
   padding-top: 15px !important;
   padding-right: 15px !important;
@@ -120,7 +111,7 @@ h1 {
   border-radius: 5px; }
 
 .card {
-  background-color: #2b2d42;
+  background-color: #d90429;
   color: #edf2f4; }
 
 .showAnime {
@@ -132,11 +123,12 @@ h1 {
   display: flex;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   .showAnime h4 {
+    font-family: 'Raleway';
     text-align: center;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   .showAnime p {
     overflow-wrap: break-word;
-    color: green;
+    color: #edf2f4;
     text-align: center;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 

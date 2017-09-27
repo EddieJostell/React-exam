@@ -30,4 +30,14 @@
   .App-intro {
     font-size: large;
   }
+
+  .errorMSG {
+    height: auto;
+    width: 350px;
+    margin: 0 auto;
+    p {
+      color: red;
+    }
+    
+  }
   

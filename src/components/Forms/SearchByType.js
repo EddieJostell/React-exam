@@ -36,7 +36,7 @@ function SearchByType (props) {
             </section>
             
 
-            <section className="form-group">
+            <section className="form-group flexForms">
             <label htmlFor="selectType">
             <h4 className="show"> Search by Type </h4>
             </label>

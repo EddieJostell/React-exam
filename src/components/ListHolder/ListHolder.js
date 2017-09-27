@@ -42,7 +42,14 @@ function ListHolder(props) {
     
     <div>
     </div>
-    <CommentHolder delComment={props.delComment} daskey={props.dkey} text={props.text} aniID={props.aniID} username={props.username} id={props.uid} comments={props.comments} />  
+    <CommentHolder delComment={props.delComment} 
+    key={props.dkey} 
+    text={props.text} 
+    aniID={props.aniID} 
+    username={props.username} 
+    id={props.uid} 
+    comments={props.comments} 
+    />  
     </div>
     </div> 
     </div>

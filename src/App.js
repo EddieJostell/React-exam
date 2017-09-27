@@ -24,32 +24,33 @@ class App extends Component {
     logVisible: false,
     regVisible: false,
     logBtn: '',
-    regBtn: ''
+    regBtn: '',
+    errorMsg: ''
   }
   
   onChange = (e) => {
     this.setState({[e.target.name] : e.target.value})
-    /* this.setState({[e.target.name] : this.state.loginBtn})
-    this.setState({[e.target.name] : this.state.regBtn}) */
   }
   
   logVisible = () => {
     console.log("LoginForm is visible!");
     this.setState({logVisible: !this.state.logVisible,
-      regVisible: false
+      regVisible: false,
+      errorMsg : ''
     })
   }
   
   regVisible = () => {
     console.log("RegForm is visible!");
     this.setState({regVisible: !this.state.regVisible,
-      logVisible: false
+      logVisible: false,
+      errorMsg : ''
     })
   }
 
   cancelOnClick = () => {
     this.setState({logVisible: false,
-    regVisible: false})
+    regVisible: false, errorMsg : ''})
   }
   
   onSubmit = (e) => {
@@ -65,11 +66,10 @@ class App extends Component {
         email: user.email,
          uid: user.uid,
         displayName: user.displayName })
+        this.setState({errorMsg: ''})
     })
-    .then((user) => {
-      alert("Welcome to HELL!");
-    })
-    .catch( error => console.log(error))
+    .catch( error => this.setState({
+      errorMsg: error.message}))
  
     
     
@@ -115,13 +115,15 @@ class App extends Component {
    /*  this.setState({ error: false}) */
     firebase.auth()
     .signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then(user => console.log("SIGNED IN!"))
-    .catch(error => alert(error.message))
+    .then(user =>  this.setState({errorMsg: ''}))
+    .catch(error => this.setState({
+      errorMsg: error.message}) )
     .catch(error => {
       console.log("You goofed", error);
     });
     
-  /*   console.log(this.state.user); */
+    
+ 
   }
   
   signOut = (e) => {
@@ -184,6 +186,7 @@ class App extends Component {
       </div> {/* END OF App-Header*/}
       <Container>
        {!this.state.user && <WelcomePage /> }
+       {this.state.errorMsg && <div className="errorMSG"> <p> { this.state.errorMsg } </p> </div>}
         {this.state.user && <MainContent 
         user={this.state.user}
         /> }
@@ -194,7 +197,7 @@ class App extends Component {
         username={this.state.username}
         onChange={this.onChange}
         register={this.onSubmit}
-        error={this.state.error}
+        error={this.state.errorMsg}
         cancel={this.cancelOnClick}
         /> : null }
         
@@ -203,7 +206,7 @@ class App extends Component {
           email={this.state.email}
           onChange={this.onChange}
           login={this.signIn}
-          error={this.state.error}
+          error={this.state.errorMsg}
           cancel={this.cancelOnClick}
           /> : null }
           

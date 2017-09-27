@@ -15,9 +15,10 @@
     }
   
     .react-logo {
-     input {
-       margin-left: 30px;
-     }
+    
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
 
      .btn-link:link {
        text-decoration: none;
@@ -36,4 +37,5 @@
 
     .buttons {
       color: #d90429;
+
     }

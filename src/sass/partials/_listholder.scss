@@ -1,25 +1,4 @@
 
-
-.media1 {
-  margin: 0 auto;
-  color: black;
-  
-  margin-top: 5px;
-  background-color: white;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-
-  h5 {
-    font-family: Roboto;
-  }
-  p {
-    overflow-wrap: break-word;
-    color: green;
-  }
-  .boxshadow {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-}
-
 .pt-15 {
   padding-top: 15px !important;
   padding-right: 15px !important;
@@ -33,7 +12,7 @@
 }
 
 .card {
-  background-color: #2b2d42;
+  background-color: /* #2b2d42 */#d90429;
   color: #edf2f4;
 }
 
@@ -47,13 +26,14 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   
   h4 {
+    font-family: 'Raleway';
     text-align: center;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
   p {
     overflow-wrap: break-word;
-    color: green;
+    color: #edf2f4;
     text-align: center;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }

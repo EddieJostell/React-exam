@@ -48,7 +48,7 @@ class Navbar extends Component {
                     {userState &&  <input
                         className="btn btn-link buttons" 
                         type="button" 
-                        value="Sign out" onClick={this.props.signOut } /> } 
+                        value="Sign Out" onClick={this.props.signOut } /> } 
                         </div> 
                         </div> //END OF ROW
                     );

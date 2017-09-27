@@ -5,7 +5,8 @@ import RegButton from '../BootstrapButtons/RegButton.js';
 class LoginForm extends Component {
     
     state = {
-        error: false
+        error: false,
+        errorMsg: ''
     }
     
     render() {
@@ -72,7 +73,7 @@ class LoginForm extends Component {
                 onChange={this.props.onChange}
                 value={this.props.regpassword}
                 />
-                
+                {this.state.errorMsg && <p> {this.state.errorMsg} </p>}
                 {this.state.error &&
                     <div className="form-control-feedback">
                     Sorry, that Password's not right. You suck!
@@ -82,13 +83,13 @@ class LoginForm extends Component {
                     type="submit" value="Register" 
                     className="btn btn-primary"/> */}
 
-                    <RegButton primary title="Register" onClick={this.props.register} />
+                    <RegButton  title="Register" onClick={this.props.register} />
                     <span> </span>
                   {/*   <input onClick={this.props.cancel} 
                     type="button" value="Cancel" 
                     className="btn btn-outline-danger"/> */}
 
-                    <CancelButton danger title="Cancel" onClick={this.props.cancel} />
+                    <CancelButton title="Cancel" onClick={this.props.cancel} />
                     </form>
                     </div>
                 )

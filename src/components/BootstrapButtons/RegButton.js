@@ -4,7 +4,7 @@ import RButton from '../HOCButtons/RButton.js';
 function RegButton(props) {
 console.log(props);
     return(
-        <RButton {...props} classPrimary="primary" />
+        <RButton {...props} className="primary" />
     )
 }
 
