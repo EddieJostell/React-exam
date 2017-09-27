@@ -2,7 +2,7 @@ import React from 'react';
 import CommentHolder from '../CommentHolder/CommenHolder.js';
 
 function ListHolder(props) {
-
+/* console.log(props.id); */
   const submit = e => {
     e.preventDefault();
     props.onSubmit(props.id);
@@ -48,7 +48,8 @@ function ListHolder(props) {
     aniID={props.aniID} 
     username={props.username} 
     id={props.uid} 
-    comments={props.comments} 
+    comments={props.comments}
+    id={props.id} 
     />  
     </div>
     </div> 

@@ -170,7 +170,7 @@ class MainContent extends Component {
     }
     
       showCommentFromDb = () => {
-   
+         
 
         const renderAniComments = [...this.state.animeList].map((elem) => {
           /*   console.log("HEJ IGEN") */
@@ -183,6 +183,7 @@ class MainContent extends Component {
               /*  console.log("Inside: " + elem.id); */
                let newComment = [...this.state.comments];
                newComment[elem.id] = snap.val();
+              
                this.setState({ comments: newComment})        
                /* console.log(newComment[elem.id]);
          */
