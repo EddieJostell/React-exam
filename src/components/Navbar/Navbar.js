@@ -19,7 +19,7 @@ class Navbar extends Component {
             <div className="row">
             <div className="col-md-9 page-title ml-auto">
            {!userState && <h2>Anime Haven</h2> }
-            {userState && <h2>Welcome to Anime Haven! {userState.email}  </h2> }
+            {userState && <h2>Welcome to Anime Haven!  </h2> }
             </div>
             
             <div className="col-md-3 react-logo mr-auto">
@@ -50,8 +50,10 @@ class Navbar extends Component {
                         className="btn btn-link buttons" 
                         type="button" 
                         value="Sign Out" onClick={this.props.signOut } /> } 
+                        {userState && <h4> {userState.email} </h4>}
                         </div> 
                         </div> //END OF ROW
+                      
                     );
                 }
             }
