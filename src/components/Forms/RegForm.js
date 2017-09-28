@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import CancelButton from '../BootstrapButtons/CancelButton.js';
 import RegButton from '../BootstrapButtons/RegButton.js';
 
+
+// Registration form containing input fields and buttons to create a user for the page.
+//Cancel button to remove the form if you dont want to make an account.
 class LoginForm extends Component {
     
     state = {
@@ -21,7 +24,7 @@ class LoginForm extends Component {
             <div style={{maxWidth: "50%", margin: "5rem auto"}}>
             <form onChange={this.props.onChange}>
 
-            <div className={`form-group ${hasError}`}>
+           {/*  <div className={`form-group ${hasError}`}>
             <label htmlFor="username">
             Username
             </label>
@@ -31,7 +34,7 @@ class LoginForm extends Component {
             name="username"
             placeholder="Enter Username"
             onChange={this.props.onChange}
-            value={this.props.username}
+            value={this.props.regusername}
             />
             
             { this.state.error && 
@@ -39,7 +42,7 @@ class LoginForm extends Component {
                 Sorry, Wrong username you suck!
                 </div>}
                 
-                </div>
+                </div> */}
 
             <div className={`form-group ${hasError}`}>
             <label htmlFor="email">

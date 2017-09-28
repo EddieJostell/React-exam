@@ -4,8 +4,10 @@ import SearchByTitle from '../Forms/SearchByTitle';
 import SearchByType from '../Forms/SearchByType';
 import ListHolder from '../ListHolder/ListHolder.js';
 
-
-
+//MainContent component that handles all the API information
+//And all components that are visible when you are logged in as a user.
+//Add and display comments
+//Inputfields for the filtering of the information.
 
 class MainContent extends Component {
     state = { 
@@ -17,11 +19,15 @@ class MainContent extends Component {
         commentVal: '',
         comments: {},
         delComment: '',
-        showList: []
+        showList: [],
+        showAllbtn: '',
+        bigList: '',
+        animeInput: '',
+        showID: []
     }
     
     componentDidMount() {
-      this.childAdded();
+        this.childAdded();
         this.childChanged();
         this.childRemoved(); 
         this.fetchPostToApi(); 
@@ -31,8 +37,8 @@ class MainContent extends Component {
     
     childAdded = () => {
         
-        firebase.database().ref(`comments/id`).on("child_added", (snapshot) => {
-            console.log("Listner knows something is added");
+        firebase.database().ref(`comments`).on("child_added", (snapshot) => {
+            /* console.log("Listner knows something is added"); */
             const comments = [...this.state.comments];
             const comment = {
                 key: snapshot.key,
@@ -44,8 +50,8 @@ class MainContent extends Component {
     }
     
     childChanged = () => {
-        firebase.database().ref(`comments/id`).on("child_changed", (snapshot) => {
-            console.log("Listner knows its Updated");
+        firebase.database().ref(`comments`).on("child_changed", (snapshot) => {
+           /*  console.log("Listner knows its Updated"); */
             //Copy state
             const comments = [...this.state.comments];
             //Loop the object
@@ -64,8 +70,8 @@ class MainContent extends Component {
     
     
     childRemoved = () => {
-        firebase.database().ref(`comments/id`).on("child_removed", (snapshot) => {
-            console.log("Listner knows something is removed!")
+        firebase.database().ref(`comments`).on("child_removed", (snapshot) => {
+           /*  console.log("Listner knows something is removed!") */
             const comments = [...this.state.comments];
             const filteredComments = comments.filter((item) => { return item.key !== snapshot.key})
             this.setState({comments: filteredComments}) 
@@ -100,9 +106,9 @@ class MainContent extends Component {
         .then(response => response.json())   
         .then(data => { 
         
-        console.log(data);
+       /*  console.log(data); */
         this.setState({animeList: data, showList : data});
-        this.showCommentFromDb();})
+        })
 
         .catch(error => console.log(error))
         
@@ -114,12 +120,13 @@ class MainContent extends Component {
     
     showMovieByTitle = (e) => {
         if (e.key === "Enter") {
-            console.log("Search or title");
+            /* console.log("Search or title"); */
+    
             const find = this.state.animeList.filter(function(anim) {
                 
-                return anim.title_romaji.toUpperCase() === e.target.value.toUpperCase();
-            });
-            this.setState({ showList : find})
+                return anim.title_romaji.toUpperCase().startsWith(e.target.value.toUpperCase());
+            }); 
+             this.setState({ showList : find})
         }
     } 
     
@@ -136,7 +143,7 @@ class MainContent extends Component {
     
     searchByShowType = (e) => {
         this.setState({ [e.target.name] : e.target.value})
-        console.log("SHOW BY TYPE");
+       /*  console.log("SHOW BY TYPE"); */
         
         const showByType = this.state.animeList.filter(function(sort) {
             return sort.type === e.target.value;
@@ -149,17 +156,23 @@ class MainContent extends Component {
        
     }
 
+
+    showAnime = (e) => {
+        this.setState({animeInput : e.target.checked})
+        /* console.log("SHOW ALL ANIME") */
+    }
+
+    findShowID = () => {
+
+    }
+
     addComment = (id) => {
-        
         const user = firebase.auth().currentUser;
-        
-       /*  console.log('button works anyhow'); */
-       /*  console.log(id); */
-        console.log("commentVal should go here -> " + " " + this.state.commentVal);
         const objectToPush = {
             text: this.state.commentVal,
             uid: user.uid,
             aniID: id,
+            email: user.email,
             username: user.displayName
         }
         
@@ -168,48 +181,23 @@ class MainContent extends Component {
         .catch(error => {console.log('messed up', error)})
         
     }
-    
-      showCommentFromDb = () => {
-         
 
-        const renderAniComments = [...this.state.animeList].map((elem) => {
-          /*   console.log("HEJ IGEN") */
-            /* let userName = ''; */
-          //  console.log(elem);
-            firebase.database().ref(`comments/${elem.id}`).on('value', (snap) => {
-             //  userName = snap.val().username;
-          
-               //console.log(elem.id);
-              /*  console.log("Inside: " + elem.id); */
-               let newComment = [...this.state.comments];
-               newComment[elem.id] = snap.val();
-              
-               this.setState({ comments: newComment})        
-               /* console.log(newComment[elem.id]);
-         */
-            }) 
-            
-        });
-        
-    } 
-    
+/*     
     deleteComment = (key) => {
-        console.log("REMOVE COMMENT!");
- 
-          firebase.database().ref(`comments/`).remove()
+        
+          firebase.database().ref(`comments`).remove()
           .then(() =>{console.log("Removed!")})
           .then(() =>{
             const removed = this.state.comments.filter(item => item.key !== key);
             this.setState({comments: removed});
           })
           .catch(error => {console.log('You messed up', error)})
-    } 
+    }  */
      
     
     
     render() {
-         
-
+        
  
         //WHOLE LIST
         const wholeList  = this.state.showList.map( (ani, key) => 
@@ -225,7 +213,7 @@ class MainContent extends Component {
         onChange={this.onChange}
         commentVal={this.props.commentVal}
         id={ani.id}
-        comments={this.state.comments[key]}
+        comments={this.state.comments}
         delComment={this.deleteComment}
         />)
 
@@ -242,62 +230,11 @@ class MainContent extends Component {
         onChange={this.onChange}
         commentVal={this.props.commentVal}
         id={ani.id}
-        comments={this.state.comments[key]}
+        comments={this.state.comments}
         delComment={this.deleteComment}
         />)
         
-        //SEARCH BY TITLE
-       /*  const titleAni = this.state.showList.map( (a, key) => 
-        <ListHolder key={key} 
-        title={a.title_romaji} 
-        episodes={a.total_episodes}
-        img={a.image_url_lge} 
-        series_type={a.series_type}
-        genres={a.genres}
-        score={a.average_score}
-        type={a.type}
-        onSubmit={this.addComment}
-        onChange={this.onChange}
-        id={a.id}
-        comments={this.state.comments[key]}
-        delComment={this.deleteComment}
-        />) 
-        
-        //GENRES
-        const genres = this.state.showList.map( (cow, key) =>
-        <ListHolder key={key} 
-        title={cow.title_romaji} 
-        episodes={cow.total_episodes}
-        img={cow.image_url_lge} 
-        series_type={cow.series_type}
-        genres={cow.genres}
-        score={cow.average_score}
-        type={cow.type}
-        id={cow.id}
-        onSubmit={this.addComment}
-        onChange={this.onChange}
-        comments={this.state.comments[key]}
-        delComment={this.deleteComment}
-        />)
-
-        //TV OR MOVIE
-        const mediaType = this.state.showList.map( (t, key) => 
-        <ListHolder key={key} 
-        title={t.title_romaji} 
-        episodes={t.total_episodes}
-        img={t.image_url_lge} 
-        series_type={t.series_type}
-        genres={t.genres}
-        score={t.average_score}
-        type={t.type}
-        onSubmit={this.addComment}
-        onChange={this.onChange}
-        id={t.id}
-        comments={this.state.comments[key]}
-        delComment={this.deleteComment}
-        />) 
- */
-      
+     
 
         return (
             <div className="row">
@@ -305,6 +242,7 @@ class MainContent extends Component {
             <br>
             </br>
             <SearchByTitle
+            showAnime={this.showAnime}
             find={this.findMovieByInput} 
             enter={this.showMovieByTitle}/>
             
@@ -315,13 +253,9 @@ class MainContent extends Component {
             </div>
             
             <div className="rightContent col-md-10">
-           {/*  <h1> ANIME GOES HERE!! </h1> */}
             {wholeList}
-         {/*   {genres}
-           {titleAni}
-           {mediaType} */}
-           
-           
+            {this.state.animeInput ? aniList : wholeList} 
+            {/* {aniList} */}
             </div>
             </div> //END OF ROW
         );

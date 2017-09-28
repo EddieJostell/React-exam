@@ -1,5 +1,7 @@
 import React from 'react';
 
+//component that lets you search by genres and type of show.
+
 function SearchByType (props) {
    
         return (

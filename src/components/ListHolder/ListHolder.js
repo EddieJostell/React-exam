@@ -1,8 +1,10 @@
 import React from 'react';
 import CommentHolder from '../CommentHolder/CommenHolder.js';
 
+//Component to render out all shows
+
 function ListHolder(props) {
-/* console.log(props.id); */
+
   const submit = e => {
     e.preventDefault();
     props.onSubmit(props.id);
@@ -42,14 +44,16 @@ function ListHolder(props) {
     
     <div>
     </div>
-    <CommentHolder delComment={props.delComment} 
+    <CommentHolder 
+    delComment={props.delComment} 
     key={props.dkey} 
     text={props.text} 
     aniID={props.aniID} 
     username={props.username} 
-    id={props.uid} 
+    userid={props.uid} 
     comments={props.comments}
     id={props.id} 
+    pinnedComment={props.pinnedComment}
     />  
     </div>
     </div> 

@@ -62,7 +62,6 @@ body {
 
 .rightContent {
   height: 1000px;
-  border: 1px solid green;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -72,7 +71,6 @@ body {
   display: flex; }
 
 .leftContent {
-  border: 1px solid red;
   width: 100%;
   height: 400px;
   display: flex;
@@ -82,24 +80,20 @@ body {
 h1 {
   color: #d90429; }
 
-.one {
-  width: 100%;
-  height: 900px;
-  border: 1px solid red; }
-
-.two {
-  width: 100%;
-  height: 900px;
-  border: 1px solid red; }
-
-.three {
-  width: 100%;
-  height: 900px;
-  border: 1px solid red; }
-
 .welcome {
-  font-family: 'Raleway';
-  color: #d90429; }
+  margin-top: 150px; }
+  .welcome h1 {
+    text-align: center;
+    font-family: 'Raleway';
+    color: #d90429; }
+  .welcome h3 {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Raleway';
+    color: #d90429; }
+  .welcome .text {
+    width: 50%;
+    margin: 0 auto; }
 
 .pt-15 {
   padding-top: 15px !important;

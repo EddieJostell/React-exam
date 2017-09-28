@@ -10,16 +10,23 @@ import './sass/App.css';
 
 const db = firebase.database();
 
+//App component where everything eventually ends up.
+//Containing all the logic for registering and login for a user. 
+//And the logic for how to sign in with a google account.
+
+
 class App extends Component {
   
   
   state = {
     regemail: '',
     regpassword: '',
+    regusername: '',
     email: '',
     password: '',
     username: '',
     user: '',
+    uid: '',
     error: false,
     logVisible: false,
     regVisible: false,
@@ -55,7 +62,8 @@ class App extends Component {
   
   onSubmit = (e) => {
     e.preventDefault();
-    /* this.setState({ error: false}) */
+    const displayName = this.state.regusername;
+    console.log(this.state.regusername);
     firebase.auth()
     .createUserWithEmailAndPassword(this.state.regemail, this.state.regpassword)
     .then((user) => {
@@ -65,7 +73,8 @@ class App extends Component {
       .set({ 
         email: user.email,
          uid: user.uid,
-        displayName: user.displayName })
+        username: displayName
+       })
         this.setState({errorMsg: ''})
     })
     .catch( error => this.setState({
@@ -80,13 +89,13 @@ class App extends Component {
     .onAuthStateChanged((user) => {
       if(user) {
 
-        const userCred = {
+       /*  const userCred = {
           uid: user.uid,
           email: user.email,
           username: user.displayName
-        }
+        } */
     
-        this.setState({user: user, user: userCred})
+        this.setState({user: user})
 
         if(user.displayName) {
           
@@ -155,12 +164,12 @@ class App extends Component {
 
     }).catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      /* var errorCode = error.code;
+      var errorMessage = error.message; */
       // The email of the user's account used.
-      var email = error.email;
+      /* var email = error.email; */
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+     /*  var credential = error.credential; */
       // ...
     });
   }

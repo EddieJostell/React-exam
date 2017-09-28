@@ -1,49 +1,43 @@
 import React from 'react';
 
+//Component to render out comments made on shows.
+//Looping through the firebase list of comments to get the information I want to render.
 
 function CommentHolder(props) {
-   
-
-    for( let comment in props.comments) {
+      var pinnedComment = [];
+        for( let comment in props.comments) {
+            for(let com in props.comments[comment].value){
+                let wow =  props.comments[comment].value[com].aniID; 
+                if(wow === props.id) {
+                    pinnedComment.push(props.comments[comment].value[com]);
+                }  
+           
+                let key = props.comments[comment].value[com];
+             
+        }
         
-        let wow = props.comments[comment].aniID; 
-        
-        if(wow = props.id) {
-            var pinnedComment = [];
-            pinnedComment.push(props.comments[comment]);
-            console.log(pinnedComment);
-
-            
-        } 
     } 
+  
+    const newComm = pinnedComment.map(key => <div> <p> {key.text} </p> <p> {key.email} </p> 
     
-    const newComm = pinnedComment.map(key => <div key={key}> <p> {console.log(key.text)} </p> <p> {console.log(key.username)} </p>  
+     {/*     <input 
+        className="btn btn-outline-light"
+        onClick={props.delComment} 
+        type="button"
+        value="Delete"
+      pinnedComment={props.pinnedComment}
+        />  */}
     
-       </div>)
- 
-    
-    return(
-        <section>
-        
-     
-        {newComm}
-        {/* 
-            <div> {props.comments ? .map(key => <section key={key}>  <p >  {props.comments[key].text} </p>  <p>Made by: {props.comments[key].username} </p>
-                
-                
-                <input 
-                className="btn btn-outline-danger"
-                onClick={props.delComment} 
-                type="button"
-                value="Delete" 
-                />
-                </section>
-            )
-            :
-            "No comments yet"
-        } </div> } */}
-        </section>
-    )
-}
+        </div>)
 
-export default CommentHolder;
+    
+        
+        
+        return(
+            <section>
+            {newComm}
+            </section>
+        )
+    }
+    
+    export default CommentHolder;

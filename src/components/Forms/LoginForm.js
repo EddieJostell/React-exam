@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 class LoginForm extends Component {
     
+//Login form with input fields and buttons to login on the page if you allready have an account.
+//Click on cancel to remove the form.
+
     state = {
         error: false
     }

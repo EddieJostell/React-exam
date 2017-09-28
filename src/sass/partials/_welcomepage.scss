@@ -1,6 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 .welcome {
+        margin-top: 150px;
+    h1 {
+        text-align: center;
     font-family: 'Raleway';
     color: #d90429;
+    }
+
+    h3 {
+        margin-top: 20px;
+        text-align: center;
+        font-family: 'Raleway';
+        color: #d90429;
+    }
+
+    .text {
+        width: 50%;
+        margin: 0 auto;
+    }
 }
+
